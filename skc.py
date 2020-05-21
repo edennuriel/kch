@@ -234,7 +234,7 @@ def set_default_passwords(args):
 
   kch=KCHelper(kc_api=conf["server"].rstrip("/"),
                kc_admin_pw=conf["kc_admin_pw"],
-               user=conf["ate_user"])
+               user=conf["ate_user"],
                default_pw=default_pw)
 
   kch.set_default_passwords()
