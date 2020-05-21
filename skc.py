@@ -253,7 +253,8 @@ def add_users(args):
 
     kch=KCHelper(kc_api=conf["server"].rstrip("/"),
             kc_admin_pw=conf["default_pw"],
-            default_pw=conf["default_pw"])
+            default_pw=conf["default_pw"],
+            user=conf["ate_user"])
     kch.set_default_roles()
     kch.add_users(users)
     kch.add_groups("admins users testers")
