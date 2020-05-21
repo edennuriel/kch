@@ -12,12 +12,12 @@ class KCHelper:
   def __init__(self,
     kc_api='https://example.com',
     kc_admin='admin',
-    kc_admin_pw='admin',
-    user='anaconda',
-    user_pw='admin',
+    kc_admin_pw='guess',
+    user='guess',
+    user_pw='guess',
     kc_realm='master',
     user_realm='dev',
-    default_pw='admin',
+    default_pw='put one you lile',
     default_roles = ["uma_authorization","author","offline_access"],
     admin_roles = ["admin"],
     user_roles = ["USER"]):
@@ -246,9 +246,9 @@ def add_users(args):
     if args.users is None:
         users = "admin"
     else:
-        if is_instance_of(args.users,list):
+        if isinstance(args.users,list):
             users = args.users
-        elif is_instance_of(args.users,str):
+        elif isinstance(args.users,str):
             users = args.users.split(" ")
 
     kch=KCHelper(kc_api=conf["server"].rstrip("/"),
@@ -258,7 +258,7 @@ def add_users(args):
     kch.add_users(users)
     kch.add_groups("admins users testers")
     kch.add_user_to_group("admin","/admins")
-    for user in users.split():
+    for user in users:
       kch.add_user_to_group(user,"/users")
     kch.add_roles_to_group("admins","admin")
     kch.add_roles_to_group("users","USER")
@@ -277,13 +277,16 @@ if __name__ == "__main__":
     conf["ate_user_pw"] = 'password'
     conf["ate_realm"] = "dev"
     conf["kc_admin "]= 'admin'
-    conf["kc_admin_pw"] = 'admin'
+    conf["kc_admin_pw"] = 'password'
     conf["kc_realm"] = "master"
+
     conf ["directory"] = f"{FQDN}-users.yaml"
     conf["email_domain"] = 'anaconda.com'
     conf["default_roles"] = "author uma_authorization offline_access".split()
     conf["admin_roles"] = "admin"
     conf["user_roles"] = "USER"
+
+
 
     conf = get_credentials()
     import argparse
